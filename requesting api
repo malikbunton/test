@@ -1,0 +1,77 @@
+/*Malik Bunton Da God 
+Gravitational Simulator */
+
+Ball b;
+boolean a;
+int initSec; //second at start time
+int initMin, initHor; // minute at start time
+int cHor, cSec, cMin, cCount, dis, initCount; //current sec,min,count
+void setup(){
+ size(400,800);
+ background(200,50,100);
+ b = new Ball();
+ a = false;
+ initSec = second();
+ initMin = minute();
+ initHor = hour();
+ println(initMin,":", initSec);
+ initCount = initHor*60*60 + initMin*60 + initSec;
+ println("time: ", initCount);
+}
+
+void draw(){
+  background(200,50,100);
+  //countfive();
+    b.motion();
+    b.move();
+    b.display();
+}
+
+void countfive(){
+  cMin = minute();
+  cSec = second();
+  cHor = hour();
+  cCount = cHor*60*60 + cMin*60 + cSec;
+  dis = cCount - initCount;
+  }
+  
+
+
+
+class Ball{
+  float y, F, pushF;
+  float vely, g, mass;
+  Ball(){
+    y = 750;
+    vely = 0;
+    g = -.098;
+    mass = .3;
+    pushF = 0;
+   }
+
+void move(){
+  y = y +vely;
+  if(y<26){
+  pushF = .4;
+  initCount = cCount;
+  }
+  else{
+    pushF =0;
+  }
+}
+
+void count(){
+  cMin = minute();
+  cSec = second();
+  cHor = hour();
+  cCount = cHor*60*60 + cMin*60 + cSec;
+  dis = cCount - initCount;
+}
+
+void motion(){
+  vely = ((F * g) * dis) + (pushF * dis) + vely;
+}
+ void display(){
+    ellipse(200,y,50,50);
+  }
+}
